@@ -1,0 +1,219 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <link rel="stylesheet" href="resources/css/graph-creator.css" />
+    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="vendors/sweetalert/dist/sweetalert.css" />
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" onclick="location.reload();" href="#">Graph Editor</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <!-- File Section -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">File <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li id="new-graph"><a href="#">New</a></li>
+                            <li id="open-graph"><a href="#">Open File...</a></li>
+                            <li id="save-graph"><a href="#">Save As...</a></li>
+                            <li id="print-graph"><a href="#">Print...</a></li>
+                        </ul>
+                    </li>
+                    <!-- Edit Section -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Edit <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li id="edit-node"><a href="#">Edit Node</a></li>
+                            <li id="delete"><a href="#">Delete</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li id="select-all-nodes"><a href="#">Select All Nodes</a></li>
+                            <li id="select-all-edges"><a href="#">Select All Edges</a></li>
+                            <li id="unselect"><a href="#">Unselect</a></li>
+                        </ul>
+                    </li>
+                    <!-- Tools Section -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Tools <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a id="find-nodes-by-name" href="#">Find Nodes By Name...</a></li>
+                            <li><a id="find-shortest-path" href="#">Find Shortest Path</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Preferences Section -->
+                    <li id="preferences"><a href="#">Preferences</a></li>
+                    <!-- Help Section -->
+                    <li id="help"><a href="#">Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Welcome Screen -->
+    <div class="jumbotron" id="welcome-body">
+        <div clas="container" style="margin-left: 10px; margin-right: 10px;">
+            <h1>Welcome to the Graph Editor</h1>
+            <p>This is a simple graph editor that uses an <a href="https://bl.ocks.org/cjrd/6863459">existing D3.js example</a> as its engine. This example has been modified in order to add more functionality. Please start by creating a new graph</p>
+            <p>
+                <a class="btn btn-lg btn-primary" id="welcome-new-graph" role="button">Create a new Graph</a>
+            </p>
+        </div>
+    </div>
+    <!-- Area for drawing the graph -->
+    <div class="jumbotron" id="graph-editor-body"></div>
+    <!-- Input file -->
+    <input type="file" id="hidden-file-upload" accept=".json">
+    <!-- Modal Window used to prompt the user when saving a graph -->
+    <div id="save-graph-modal" class="modal fade" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Save As...</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="graph-filename" aria-describedby="Name of the file" placeholder="Enter filename">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="save-graph-button">Save Graph</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Window used for the preferences -->
+    <div id="preferences-modal" class="modal fade" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Preferences</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Graph Type:</label>
+                            <div class="col-sm-6">
+                                <div class="dropdown">
+                                    <button class="btn btn-default btn-sm dropdown-toggle" id="selected-default-graph-type" type="button" data-toggle="dropdown">Undirected Graph
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu" id="default-graph-type">
+                                        <li class="selected" data-value="undirected"><a href="#">Undirected Graph</a></li>
+                                        <li data-value="directed"><a href="#">Directed Graph</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="default-node-size">Node Size:</label>
+                            <div class="col-sm-3">
+                                <input type="number" class="form-control" value="50" id="default-node-size" placeholder="Default node size">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="default-node-color">Node Color:</label>
+                            <div class="col-sm-3">
+                                <input type="color" class="form-control" value="#f9f9f9" id="default-node-color" placeholder="Default node color">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="default-node-label">Node Default Label:</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" value="Random Value" id="default-node-label" placeholder="Default node label">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="default-font-size">Node Font Size:</label>
+                            <div class="col-sm-3">
+                                <input type="number" class="form-control" value="15" id="default-font-size" placeholder="Default font size for the nodes">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="default-font-color">Node Font Color:</label>
+                            <div class="col-sm-3">
+                                <input type="color" class="form-control" value="#000000" id="default-font-color" placeholder="Default node font color">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="default-edge-color">Edge Color:</label>
+                            <div class="col-sm-3">
+                                <input type="color" class="form-control" value="#000000" id="default-edge-color" placeholder="Default edge color">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="save-preferences-button">Save Preferences</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Window used to prompt the user for the name of the nodes -->
+    <div id="find-nodes-modal" class="modal fade" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Find Nodes By Name</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="find-text">Find:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="find-text" placeholder="Name of the node">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="find-text">Option:</label>
+                            <div class="col-sm-9">
+                                <div class="col-sm-6">
+                                    <input class="form-check-input" type="radio" name="find-option" id="find-exact" value="exact" checked> Exact Match
+                                </div>
+                                <div class="col-sm-6">
+                                    <input class="form-check-input" type="radio" name="find-option" id="find-contains" value="contains"> Contains
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="find-nodes">Find</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Javacript Libraries -->
+    <script src="vendors/jquery/dist/jquery.min.js"></script>
+    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="vendors/d3/d3.v3.js" charset="utf-8"></script>
+    <script src="vendors/file-saver/file-saver.min.js"></script>
+    <script src="vendors/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="vendors/jQuery.print/jQuery.print.js"></script>
+    <script src="resources/js/graph-creator.js"></script>
+    <script src="resources/js/common.js"></script>
+</body>
+
+</html>

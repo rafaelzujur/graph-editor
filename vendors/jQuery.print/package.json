@@ -1,0 +1,61 @@
+{
+  "name": "jQuery.print",
+  "filename": "jQuery.print.min.js",
+  "version": "1.4.1",
+  "homepage": "https://doersguild.github.io/jQuery.print/",
+  "authors": [
+    "Sathvik P <sathvik@doersguild.com>"
+  ],
+  "description": "Easy to use, Element Printing Plugin for jQuery, for printing specific parts of a page",
+  "keywords": [
+    "print",
+    "element printing",
+    "jquery print"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7.2"
+  },
+  "license": "CC-BY",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/DoersGuild/jQuery.print.git"
+  },
+  "autoupdate": {
+    "source": "git",
+    "target": "git://github.com/DoersGuild/jQuery.print.git",
+    "basePath": "",
+    "files": [
+      "jQuery.print*"
+    ]
+  },
+  "gitHead": "6ccdbf1dd4222cae7dfd4612bef873e530d3d525",
+  "bugs": {
+    "url": "https://github.com/DoersGuild/jQuery.print/issues"
+  },
+  "_id": "jQuery.print@1.4.1",
+  "scripts": {},
+  "_shasum": "3bd1f5e75d5f41b8342dcb67da4962782a183c41",
+  "_from": "jQuery.print@latest",
+  "_npmVersion": "3.10.3",
+  "_nodeVersion": "6.3.0",
+  "_npmUser": {
+    "name": "meneguite",
+    "email": "ronaldo@fireguard.com.br"
+  },
+  "dist": {
+    "shasum": "3bd1f5e75d5f41b8342dcb67da4962782a183c41",
+    "tarball": "https://registry.npmjs.org/jQuery.print/-/jQuery.print-1.4.1.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "meneguite",
+      "email": "ronaldo@fireguard.com.br"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/jQuery.print-1.4.1.tgz_1472576406294_0.65839923475869"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/jQuery.print/-/jQuery.print-1.4.1.tgz"
+}
