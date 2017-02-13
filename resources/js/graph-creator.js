@@ -1123,6 +1123,11 @@ document.onload = (function(d3, saveAs, Blob, undefined) {
         graph.unSelectAllEdges();
     });
 
+    // Events for modal window to display help
+    $("#help").on("click", function(event) {
+        $("#help-modal").modal("show");
+    });
+
     // Hides the editing window
     $("#graph-editor-body").css({ display: "none" });
 

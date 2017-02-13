@@ -3,7 +3,7 @@ Simple web application for creating graphs. It is implemented using D3.js, JQuer
 
 ## Installation:
 +   Copy or clone this repository
-+   Open the file index.html in your favourite browser
++   Open the file **index.html** in your favourite browser
 
 ## Background
 Graph Editor has the following functional requirements:
@@ -27,3 +27,4 @@ The following are keyboard shortcuts that can be used to execute the functionali
 + **Control + Shift + X**: Unselect all elements.
 + **Control + Shift + F**: Find node by name.
 + **Control + Shift + S**: Find shortest path.
++ **Backspace/delete**: Remove a node or edge.

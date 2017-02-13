@@ -1,3 +1,4 @@
+// Dijkstra algorithm based on http://www.gitta.info/Accessibiliti/en/html/Dijkstra_learningObject1.html
 function dijkstra(graph, type, source) {
     var dist = new Object();
     var previous = new Object();

@@ -205,6 +205,44 @@
             </div>
         </div>
     </div>
+    <!-- Modal Window used for help section -->
+    <div id="help-modal" class="modal fade" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Help</h4>
+                </div>
+                <div class="modal-body">
+                    <h2>Mouse + Keyboard Actions</h2>
+                    <ul>
+                        <li>Click: Creates a node</li>
+                        <li>Control + Click on node: Edit the title of a node</li>
+                        <li>Control + Click on node and Hold + Drag to other node: Create an edge</li>
+                        <li>Click on node/edge: Select/unselect node/edge</li>
+                        <li>Click on a node and Hold: Drag the node</li>
+                        <li>Mouse Spinwheel: Zoom in/out</li>
+                        <li>Shift + Click: Multiple selection of nodes/edges</li>
+                        <li>Click on graph and Hold: Drag the graph</li>
+                    </ul>
+
+                    <h2>Keyboard Shortcuts</h2>
+                    <ul>
+                        <li>Control + Shift + A: Select all nodes</li>
+                        <li>Control + Shift + E: Select all edges</li>
+                        <li>Control + Shift + X: Unselect all elements</li>
+                        <li>Control + Shift + F: Find node by name</li>
+                        <li>Control + Shift + S: Find shortest path</li>
+                        <li>Backspace/Delete: Remove a node/edge</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Got it</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Javacript Libraries -->
     <script src="vendors/jquery/dist/jquery.min.js"></script>
     <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
